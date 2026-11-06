@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
+    <title>Kho Báu Sinh Viên - Mua Tài Liệu, Giáo Trình & Thuê Thiết Bị Học Tập</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandNavy: '#003366',
+                        brandOrange: '#FF9900',
+                        brandLightBg: '#F8FAFC'
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-brandLightBg text-gray-800 font-sans antialiased relative">
+
+    <!-- HEADER & NAVIGATION -->
+    <header class="bg-white shadow-md sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-brandOrange text-white p-2.5 rounded-xl font-bold text-2xl shadow-sm">
+                    <i class="fas fa-box-open"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold text-brandNavy leading-none tracking-tight">Kho Báu Sinh Viên</h1>
+                    <span class="text-xs text-gray-500 font-medium hidden sm:inline-block mt-0.5">Kho nhỏ hôm nay, hành trang lớn ngày mai</span>
+                </div>
+            </div>
+
+            <div class="hidden md:flex flex-1 max-w-md mx-8">
+                <div class="relative w-full">
+                    <input id="searchInput" onkeyup="filterItems()" type="text" placeholder="Tìm giáo trình, đề thi, laptop, máy chiếu..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-brandNavy focus:border-transparent transition">
+                    <i class="fas fa-search absolute left-3.5 top-3 text-gray-400"></i>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-3">
+                <button onclick="toggleCartModal()" class="relative text-brandNavy hover:text-brandOrange p-2 text-xl transition" title="Giỏ hàng">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cartCount" class="absolute top-0 right-0 bg-brandOrange text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                </button>
+                <div id="authHeaderArea">
+                    <button onclick="openAuthModal('login')" class="bg-brandNavy text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-blue-900 transition shadow-sm flex items-center gap-1.5">
+                        <i class="fas fa-user-circle"></i> Đăng nhập
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <nav class="bg-brandNavy text-white border-t border-blue-900">
+            <div class="max-w-7xl mx-auto px-4 flex space-x-8 overflow-x-auto py-2.5 text-sm font-medium whitespace-nowrap">
+                <a href="#home" class="hover:text-brandOrange transition flex items-center gap-1.5"><i class="fas fa-home"></i> Trang Chủ</a>
+                <a href="#giaotrinh" class="hover:text-brandOrange transition flex items-center gap-1.5"><i class="fas fa-book-open text-brandOrange"></i> Giáo Trình</a>
+                <a href="#tailieu" class="hover:text-brandOrange transition flex items-center gap-1.5"><i class="fas fa-folder"></i> Kho Tài Liệu</a>
+                <a href="#slides" class="hover:text-brandOrange transition flex items-center gap-1.5"><i class="fas fa-file-powerpoint"></i> Bán Slide</a>
+                <a href="#thietbi" class="hover:text-brandOrange transition flex items-center gap-1.5"><i class="fas fa-laptop"></i> Cho Thuê Thiết Bị</a>
+                <a href="#calculator" class="hover:text-brandOrange transition flex items-center gap-1.5"><i class="fas fa-calculator"></i> Tính Giá Thuê</a>
+                <a href="https://zalo.me/0765750541" target="_blank" class="hover:text-brandOrange transition flex items-center gap-1.5"><i class="fas fa-comment-dots text-brandOrange"></i> Zalo: 0765750541</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="bg-gradient-to-r from-brandNavy to-blue-900 text-white py-12 md:py-16 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+            <div class="md:w-3/5 space-y-4 text-center md:text-left">
+                <div class="inline-flex items-center gap-2 bg-brandOrange/20 border border-brandOrange/40 text-brandOrange px-3 py-1 rounded-full text-xs font-bold">
+                    <i class="fas fa-star"></i> Phương châm: Rẻ – Tiện lợi – Uy tín
+                </div>
+                <h2 class="text-3xl md:text-5xl font-extrabold leading-tight">Đồng Hành Cùng Học Sinh - Sinh Viên</h2>
+                <p class="text-blue-100 text-sm md:text-base max-w-2xl">
+                    Tối ưu chi phí học tập đến 50%. Mua bán giáo trình học tập giá rẻ, sở hữu kho đề thi trắc nghiệm đại cương chuẩn hoặc thuê ngắn hạn laptop, máy chiếu, bảng vẽ điện tử.
+                </p>
+                <div class="pt-2 flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+                    <a href="#giaotrinh" class="bg-brandOrange text-white px-6 py-3 rounded-xl font-bold text-center hover:bg-yellow-500 transition shadow-lg flex items-center justify-center gap-2">
+                        <i class="fas fa-book-reader"></i> Mua Giáo Trình Giá Rẻ
+                    </a>
+                    <a href="#thietbi" class="bg-white text-brandNavy px-6 py-3 rounded-xl font-bold text-center hover:bg-gray-100 transition shadow-lg flex items-center justify-center gap-2">
+                        <i class="fas fa-calendar-alt"></i> Thuê Thiết Bị Ngay
+                    </a>
+                </div>
+            </div>
+
+            <div class="md:w-2/5 w-full max-w-sm">
+                <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 text-center shadow-2xl relative overflow-hidden">
+                    <div class="absolute -right-6 -top-6 bg-brandOrange text-white text-[10px] font-bold py-1 px-8 rotate-45">ƯU ĐÃI</div>
+                    <i class="fas fa-graduation-cap text-5xl text-brandOrange mb-3"></i>
+                    <h3 class="text-xl font-bold">Gói Thành Viên Sinh Viên</h3>
+                    <p class="text-xs text-blue-100 my-2">Tải không giới hạn tất cả đề thi, giáo trình trắc nghiệm và sách điện tử kỹ năng</p>
+                    <div class="my-3">
+                        <span class="text-3xl font-extrabold text-brandOrange">49.000 VNĐ</span>
+                        <span class="text-xs text-blue-200">/ tháng</span>
+                    </div>
+                    <button onclick="buyNow('Gói Thành Viên Sinh Viên 49k/tháng', 49000)" class="w-full bg-brandOrange text-white py-2.5 rounded-xl font-bold hover:bg-yellow-500 transition shadow-md">Đăng Ký Ngay</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KHO GIÁO TRÌNH -->
+    <section id="giaotrinh" class="max-w-7xl mx-auto px-4 py-12">
+        <div class="flex justify-between items-end mb-8">
+            <div>
+                <span class="bg-orange-100 text-brandOrange text-xs font-bold px-3 py-1 rounded-full"><i class="fas fa-fire mr-1"></i> Bán Giá Học Sinh - Sinh Viên</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-brandNavy mt-2">Kho Giáo Trình & Sách Chuyên Ngành</h2>
+                <p class="text-sm text-gray-600 mt-1">Sách giáo trình bản in / file chuẩn, đầy đủ môn đại cương và chuyên ngành bám sát chương trình học</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="item-card bg-white rounded-2xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition flex flex-col justify-between" data-name="Giáo Trình Triết Học Mác Lênin Đại Cương">
+                <div>
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1 rounded-lg">Môn Đại Cương</span>
+                        <span class="text-brandOrange font-bold text-lg">20.000 VNĐ</span>
+                    </div>
+                    <h3 class="font-bold text-gray-800 text-base">Giáo Trình Triết Học Mác - Lênin (Đầy Đủ Chương)</h3>
+                    <p class="text-xs text-gray-500 mt-2 flex items-center gap-1">
+                        <i class="fas fa-check-circle text-green-500"></i> Bao gồm tóm tắt sơ đồ tư duy và bộ câu hỏi trắc nghiệm ôn tập
+                    </p>
+                </div>
+                <div class="mt-5 pt-4 border-t border-gray-100 flex gap-2">
+                    <button onclick="openPreviewModal('Giáo Trình Triết Học Mác - Lênin', 'Nội dung xem trước:\nChương 1: Triết học và vai trò của triết học trong đời sống xã hội.\nChương 2: Chủ nghĩa duy vật biện chứng...\nGiáo trình trình bày hệ thống kiến thức căn bản phục vụ thi trắc nghiệm.')" class="flex-1 bg-gray-100 text-gray-700 py-2 rounded-xl text-xs font-semibold hover:bg-gray-200 transition"><i class="fas fa-eye mr-1"></i> Xem trước</button>
+                    <button onclick="addToCart('Giáo Trình Triết Học Mác - Lênin', 20000)" class="flex-1 bg-brandNavy text-white py-2 rounded-xl text-xs font-semibold hover:bg-blue-900 transition"><i class="fas fa-cart-plus mr-1"></i> Thêm giỏ hàng</button>
+                </div>
+            </div>
+
+            <div class="item-card bg-white rounded-2xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition flex flex-col justify-between" data-name="Giáo Trình Tâm Lý Học Đại Cương">
+                <div>
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-1 rounded-lg">Môn Đại Cương</span>
+                        <span class="text-brandOrange font-bold text-lg">25.000 VNĐ</span>
+                    </div>
+                    <h3 class="font-bold text-gray-800 text-base">Giáo Trình Tâm Lý Học Đại Cương</h3>
+                    <p class="text-xs text-gray-500 mt-2 flex items-center gap-1">
+                        <i class="fas fa-check-circle text-green-500"></i> Tài liệu hệ thống hóa các khái niệm và quy luật tâm lý cơ bản
+                    </p>
+                </div>
+                <div class="mt-5 pt-4 border-t border-gray-100 flex gap-2">
+                    <button onclick="openPreviewModal('Giáo Trình Tâm Lý Học Đại Cương', 'Nội dung xem trước:\nChương 1: Tâm lý học là một khoa học.\nChương 2: Hoạt động và giao tiếp.\nChương 3: Sự hình thành và phát triển tâm lý, ý thức.')" class="flex-1 bg-gray-100 text-gray-700 py-2 rounded-xl text-xs font-semibold hover:bg-gray-200 transition"><i class="fas fa-eye mr-1"></i> Xem trước</button>
+                    <button onclick="addToCart('Giáo Trình Tâm Lý Học Đại Cương', 25000)" class="flex-1 bg-brandNavy text-white py-2 rounded-xl text-xs font-semibold hover:bg-blue-900 transition"><i class="fas fa-cart-plus mr-1"></i> Thêm giỏ hàng</button>
+                </div>
+            </div>
+
+            <div class="item-card bg-white rounded-2xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition flex flex-col justify-between" data-name="Giáo Trình Cơ Sở Dữ Liệu Quản Trị Học">
+                <div>
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2.5 py-1 rounded-lg">Chuyên Ngành</span>
+                        <span class="text-brandOrange font-bold text-lg">30.000 VNĐ</span>
+                    </div>
+                    <h3 class="font-bold text-gray-800 text-base">Giáo Trình Cơ Sở Dữ Liệu & Quản Trị Học</h3>
+                    <p class="text-xs text-gray-500 mt-2 flex items-center gap-1">
+                        <i class="fas fa-check-circle text-green-500"></i> Hướng dẫn lý thuyết căn bản và bài tập thực hành ứng dụng
+                    </p>
+                </div>
+                <div class="mt-5 pt-4 border-t border-gray-100 flex gap-2">
+                    <button onclick="openPreviewModal('Giáo Trình Cơ Sở Dữ Liệu', 'Nội dung xem trước:\nKiến thức về mô hình thực thể ER, ngôn ngữ SQL căn bản và các bài tập thực hành trên máy tính.')" class="flex-1 bg-gray-100 text-gray-700 py-2 rounded-xl text-xs font-semibold hover:bg-gray-200 transition"><i class="fas fa-eye mr-1"></i> Xem trước</button>
+                    <button onclick="addToCart('Giáo Trình Cơ Sở Dữ Liệu', 30000)" class="flex-1 bg-brandNavy text-white py-2 rounded-xl text-xs font-semibold hover:bg-blue-900 transition"><i class="fas fa-cart-plus mr-1"></i> Thêm giỏ hàng</button>
+                </div>
+            </div>
+        </div>
+    </section>            <!-- Giáo trình Card 2 -->
+            <div class="item-card bg-white rounded-2xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition flex flex-col justify-between" data-name="Giáo Trình Pháp Luật Đại Cương">
+                <div>
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1 rounded-lg">Môn Đại Cương</span>
+                        <span class="text-brandOrange font-bold text-lg">25.000 VNĐ</span>
+                    </div>
+                    <h3 class="font-bold text-gray-800 text-base">Giáo Trình Pháp Luật Đại Cương & Bài Tập Lớn</h3>
+                    <p class="text-xs text-gray-500 mt-2 flex items-center gap-1">
+                        <i class="fas fa-check-circle text-green-500"></i> Kèm các dạng đề thi trắc nghiệm và tình huống pháp luật mẫu
+                    </p>
+                </div>
+                <div class="mt-5 pt-4 border-t border-gray-100 flex gap-2">
+                    <button onclick="openPreviewModal('Giáo Trình Pháp Luật Đại Cương', 'Nội dung xem trước:\nNguồn gốc, bản chất, vai trò của Nhà nước và Pháp luật Việt Nam. Tài liệu có hệ thống câu hỏi trắc nghiệm tự luyện.')" class="flex-1 bg-gray-100 text-gray-700 py-2 rounded-xl text-xs font-semibold hover:bg-gray-200 transition"><i class="fas fa-eye mr-1"></i> Xem trước</button>
+                    <button onclick="addToCart('Giáo Trình Pháp Luật Đại Cương', 25000)" class="flex-1 bg-brandNavy text-white py-2 rounded-xl text-xs font-semibold hover:bg-blue-900 transition"><i class="fas fa-cart-plus mr-1"></i> Thêm giỏ hàng</button>
+                </div>
+            </div>    <!-- KHO TÀI LIỆU -->
+    <section id="tailieu" class="max-w-7xl mx-auto px-4 py-12 border-t border-gray-200">
+        <div class="flex justify-between items-end mb-8">
+            <div>
+                <h2 class="text-2xl md:text-3xl font-bold text-brandNavy">Kho Tài Liệu & Bài Giảng Trực Tuyến</h2>
+                <p class="text-sm text-gray-600 mt-1">Tổng hợp đề thi cũ, giáo trình trắc nghiệm đại cương và tài liệu kỹ năng học đại học</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="documentGrid">
+            <div class="item-card bg-white rounded-2xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition flex flex-col justify-between" data-name="Triết Học Mác - Lênin">
+                <div>
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="bg-blue-100 text-brandNavy text-xs font-bold px-2.5 py-1 rounded-lg">Môn Đại Cương</span>
+                        <span class="text-brandOrange font-bold text-lg">15.000 VNĐ</span>
+                    </div>
+                    <h3 class="font-bold text-gray-800 text-base">Bộ 500 Câu Trắc Nghiệm Ôn Thi Triết Học Mác - Lênin</h3>
+                    <p class="text-xs text-gray-500 mt-2 flex items-center gap-1">
+                        <i class="fas fa-check-circle text-green-500"></i> Kèm đáp án chi tiết và bộ đề thi tham khảo các năm
+                    </p>
+                </div>
+                <div class="mt-5 pt-4 border-t border-gray-100 flex gap-2">
+                    <button onclick="openPreviewModal('Bộ 500 Câu Trắc Nghiệm Triết Học Mác - Lênin', 'Nội dung xem trước:\nCâu 1: Đối tượng nghiên cứu của Triết học Mác - Lênin là gì?\nA. Các quy luật vận động, phát triển chung nhất của tự nhiên, xã hội và tư duy.\nB. Các hiện tượng vật lý trong tự nhiên...')" class="flex-1 bg-gray-100 text-gray-700 py-2 rounded-xl text-xs font-semibold hover:bg-gray-200 transition"><i class="fas fa-eye mr-1"></i> Xem trước</button>
+                    <button onclick="addToCart('Bộ 500 Câu Trắc Nghiệm Triết Học Mác - Lênin', 15000)" class="flex-1 bg-brandNavy text-white py-2 rounded-xl text-xs font-semibold hover:bg-blue-900 transition"><i class="fas fa-cart-plus mr-1"></i> Thêm giỏ hàng</button>
+                </div>
+            </div>
+
+            <div class="item-card bg-white rounded-2xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition flex flex-col justify-between" data-name="Tâm Lý Học Đại Cương">
+                <div>
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-1 rounded-lg">Ôn Thi Trắc Nghiệm</span>
+                        <span class="text-brandOrange font-bold text-lg">20.000 VNĐ</span>
+                    </div>
+                    <h3 class="font-bold text-gray-800 text-base">Đề Thi Mẫu Tâm Lý Học Đại Cương (Có Đáp Án)</h3>
+                    <p class="text-xs text-gray-500 mt-2 flex items-center gap-1">
+                        <i class="fas fa-check-circle text-green-500"></i> Tổng hợp cấu trúc đề thi trắc nghiệm mới nhất
+                    </p>
+                </div>
+                <div class="mt-5 pt-4 border-t border-gray-100 flex gap-2">
+                    <button onclick="openPreviewModal('Đề Thi Mẫu Tâm Lý Học Đại Cương', 'Nội dung xem trước:\nTâm lý người mang bản chất xã hội và có tính lịch sử. Tài liệu bao gồm 100 câu hỏi trắc nghiệm trọng tâm bám sát chương trình học...')" class="flex-1 bg-gray-100 text-gray-700 py-2 rounded-xl text-xs font-semibold hover:bg-gray-200 transition"><i class="fas fa-eye mr-1"></i> Xem trước</button>
+                    <button onclick="addToCart('Đề Thi Mẫu Tâm Lý Học Đại Cương', 20000)" class="flex-1 bg-brandNavy text-white py-2 rounded-xl text-xs font-semibold hover:bg-blue-900 transition"><i class="fas fa-cart-plus mr-1"></i> Thêm giỏ hàng</button>
+                </div>
+            </div>
+
+            <div class="item-card bg-white rounded-2xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition flex flex-col justify-between" data-name="Kỹ Năng Thuyết Trình Slide">
+                <div>
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="bg-green-100 text-green-800 text-xs font-bold px-2.5 py-1 rounded-lg">Kỹ Năng Đại Học</span>
+                        <span class="text-brandOrange font-bold text-lg">10.000 VNĐ</span>
+                    </div>
+                    <h3 class="font-bold text-gray-800 text-base">Sách Điện Tử: Kỹ Năng Thuyết Trình & Thiết Kế Slide</h3>
+                    <p class="text-xs text-gray-500 mt-2 flex items-center gap-1">
+                        <i class="fas fa-check-circle text-green-500"></i> Tặng kèm hơn 15 mẫu Slide PowerPoint chuyên nghiệp
+                    </p>
+                </div>
+                <div class="mt-5 pt-4 border-t border-gray-100 flex gap-2">
+                    <button onclick="openPreviewModal('Sách Điện Tử Kỹ Năng Thuyết Trình', 'Nội dung xem trước:\nHướng dẫn áp dụng quy tắc 10-20-30 trong thiết kế Slide bài tập lớn cho sinh viên...')" class="flex-1 bg-gray-100 text-gray-700 py-2 rounded-xl text-xs font-semibold hover:bg-gray-200 transition"><i class="fas fa-eye mr-1"></i> Xem trước</button>
+                    <button onclick="addToCart('Sách Điện Tử Kỹ Năng Thuyết Trình', 10000)" class="flex-1 bg-brandNavy text-white py-2 rounded-xl text-xs font-semibold hover:bg-blue-900 transition"><i class="fas fa-cart-plus mr-1"></i> Thêm giỏ hàng</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DỊCH VỤ BÁN SLIDE POWERPOINT -->
+    <section id="slides" class="max-w-7xl mx-auto px-4 py-12 border-t border-gray-200">
+        <div class="mb-8">
+            <span class="bg-orange-100 text-brandOrange text-xs font-bold px-3 py-1 rounded-full">
+                <i class="fas fa-file-powerpoint mr-1"></i> Dịch vụ thiết kế
+            </span>
+            <h2 class="text-2xl md:text-3xl font-bold text-brandNavy mt-2">Dịch Vụ Bán Slide PowerPoint</h2>
+            <p class="text-sm text-gray-600 mt-1">Thiết kế slide thuyết trình theo yêu cầu – chỉ 6.000 VNĐ/slide.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="item-card bg-white rounded-2xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition flex flex-col justify-between"
+                 data-name="Slide PowerPoint thiết kế thuyết trình theo yêu cầu">
+                <div>
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2.5 py-1 rounded-lg">Slide PowerPoint</span>
+                        <span class="text-brandOrange font-bold text-lg">6.000 VNĐ/slide</span>
+                    </div>
+                    <h3 class="font-bold text-gray-800 text-base">Slide Thuyết Trình Theo Yêu Cầu</h3>
+                    <p class="text-xs text-gray-500 mt-2">
+                        <i class="fas fa-check-circle text-green-500 mr-1"></i>
+                        Thiết kế theo chủ đề, nội dung, màu sắc và phong cách bạn mong muốn.
+                    </p>
+                </div>
+
+                <div class="mt-5 pt-4 border-t border-gray-100">
+                    <label for="slideQuantity" class="block text-xs font-bold text-gray-700 mb-2">Số lượng slide</label>
+                    <input id="slideQuantity" type="number" min="1" step="1" value="1"
+                           class="w-full border rounded-xl p-3 text-sm mb-3 focus:ring-2 focus:ring-brandNavy outline-none">
+
+                    <label for="slideTopic" class="block text-xs font-bold text-gray-700 mb-2">Chủ đề / Tên bài thuyết trình</label>
+                    <input id="slideTopic" type="text" placeholder="Ví dụ: Tâm lý học phát triển"
+                           class="w-full border rounded-xl p-3 text-sm mb-3 focus:ring-2 focus:ring-brandNavy outline-none">
+
+                    <label for="slideStyle" class="block text-xs font-bold text-gray-700 mb-2">Phong cách thiết kế mong muốn</label>
+                    <select id="slideStyle" class="w-full border rounded-xl p-3 text-sm mb-3 focus:ring-2 focus:ring-brandNavy outline-none bg-white">
+                        <option value="Hiện đại, tối giản">Hiện đại, tối giản</option>
+                        <option value="Học thuật, chuyên nghiệp">Học thuật, chuyên nghiệp</option>
+                        <option value="Sáng tạo, nhiều hình ảnh">Sáng tạo, nhiều hình ảnh</option>
+                        <option value="Trang trọng, nghiêm túc">Trang trọng, nghiêm túc</option>
+                        <option value="Theo mẫu tham khảo">Theo mẫu tham khảo</option>
+                    </select>
+
+                    <label for="slideColor" class="block text-xs font-bold text-gray-700 mb-2">Màu sắc chủ đạo (nếu có)</label>
+                    <input id="slideColor" type="text" placeholder="Ví dụ: xanh dương - trắng, đen - trắng..."
+                           class="w-full border rounded-xl p-3 text-sm mb-3 focus:ring-2 focus:ring-brandNavy outline-none">
+
+                    <label for="slideDescription" class="block text-xs font-bold text-gray-700 mb-2">Mô tả yêu cầu thiết kế</label>
+                    <textarea id="slideDescription" rows="4"
+                              placeholder="Mô tả nội dung cần trình bày, yêu cầu của giảng viên, hình ảnh muốn sử dụng, bố cục, tài liệu tham khảo hoặc lưu ý đặc biệt..."
+                              class="w-full border rounded-xl p-3 text-sm mb-3 focus:ring-2 focus:ring-brandNavy outline-none resize-y"></textarea>
+
+                    <p class="text-[11px] text-gray-500 mb-3">
+                        Ghi càng cụ thể càng tốt để slide phù hợp với nội dung và yêu cầu của bạn.
+                    </p>
+
+                    <button onclick="addSlidesToCart()" class="w-full bg-brandNavy text-white py-3 rounded-xl font-bold hover:bg-blue-900 transition">
+                        <i class="fas fa-cart-plus mr-1"></i> Thêm slide vào giỏ hàng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>    <!-- CÔNG CỤ TÍNH GIÁ THUÊ THIẾT BỊ -->
+    <section id="calculator" class="bg-gray-100 py-12 border-t border-b">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-gray-200">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold text-brandNavy flex items-center justify-center gap-2">
+                        <i class="fas fa-calculator text-brandOrange"></i> Công Cụ Tính Chi Phí Thuê Thiết Bị
+                    </h2>
+                    <p class="text-xs text-gray-500 mt-1">Chọn loại thiết bị và thời gian sử dụng để dự toán chi phí chính xác</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Thiết bị cần thuê</label>
+                        <select id="calcDevice" onchange="calculateRentalPrice()" class="w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-brandNavy outline-none bg-white">
+                            <option value="50000_200000_Máy tính xách tay (Laptop)">Máy tính xách tay / Laptop (50.000 VNĐ/giờ - 200.000 VNĐ/ngày)</option>
+                            <option value="40000_150000_Bảng vẽ điện tử / Sách điện tử">Bảng vẽ điện tử / Sách điện tử (40.000 VNĐ/giờ - 150.000 VNĐ/ngày)</option>
+                            <option value="60000_300000_Máy chiếu thuyết trình">Máy chiếu thuyết trình (60.000 VNĐ/giờ - 300.000 VNĐ/ngày)</option>
+                            <option value="30000_150000_Chân máy ảnh & Micro thu âm">Chân máy ảnh (Tripod) + Micro thu âm (30.000 VNĐ/giờ - 150.000 VNĐ/ngày)</option>
+                            <option value="10000_40000_Máy tính cầm tay Casio FX">Máy tính cầm tay Casio FX (10.000 VNĐ/giờ - 40.000 VNĐ/ngày)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Hình thức thuê</label>
+                        <select id="calcType" onchange="calculateRentalPrice()" class="w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-brandNavy outline-none bg-white">
+                            <option value="hour">Thuê theo giờ</option>
+                            <option value="day">Thuê theo ngày</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label id="calcLabelAmount" class="block text-xs font-bold text-gray-700 mb-1">Số giờ thuê</label>
+                        <input id="calcAmount" type="number" min="1" value="2" onchange="calculateRentalPrice()" onkeyup="calculateRentalPrice()" class="w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-brandNavy outline-none">
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <div>
+                        <span class="text-xs text-gray-600 block">Tổng chi phí dự toán:</span>
+                        <span id="totalPriceResult" class="text-2xl font-extrabold text-brandOrange">100.000 VNĐ</span>
+                    </div>
+                    <button onclick="checkoutCalculatedRental()" class="w-full sm:w-auto bg-brandOrange text-white px-6 py-2.5 rounded-xl font-bold hover:bg-yellow-500 transition shadow-sm">
+                        <i class="fas fa-qrcode mr-1"></i> Thanh Toán & Đặt Lịch
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL ĐĂNG NHẬP / ĐĂNG KÝ -->
+    <div id="authModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl"><i class="fas fa-times"></i></button>
+
+            <div class="flex border-b border-gray-200 mb-6">
+                <button id="tabLogin" onclick="switchAuthTab('login')" class="flex-1 py-2.5 text-center font-bold text-brandNavy border-b-2 border-brandNavy transition">Đăng Nhập</button>
+                <button id="tabRegister" onclick="switchAuthTab('register')" class="flex-1 py-2.5 text-center font-bold text-gray-400 border-b-2 border-transparent transition">Đăng Ký</button>
+            </div>
+
+            <form id="formLogin" onsubmit="handleLoginSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Email hoặc Số điện thoại / MSSV</label>
+                    <input type="text" id="loginUser" required placeholder="Nhập email hoặc MSSV..." class="w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-brandNavy outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Mật khẩu</label>
+                    <input type="password" required placeholder="••••••••" class="w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-brandNavy outline-none">
+                </div>
+                <div class="flex justify-between items-center text-xs">
+                    <label class="flex items-center gap-1.5 text-gray-600 cursor-pointer">
+                        <input type="checkbox" class="rounded text-brandNavy"> Ghi nhớ đăng nhập
+                    </label>
+                    <a href="https://zalo.me/0765750541" target="_blank" class="text-brandNavy font-semibold hover:underline">Quên mật khẩu? (Hỗ trợ Zalo)</a>
+                </div>
+                <button type="submit" class="w-full bg-brandNavy text-white py-3 rounded-xl font-bold hover:bg-blue-900 transition shadow-md">Đăng Nhập Ngay</button>
+            </form>
+
+            <form id="formRegister" onsubmit="handleRegisterSubmit(event)" class="space-y-3 hidden">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Họ và tên sinh viên</label>
+                    <input type="text" id="regName" required placeholder="Ví dụ: Võ Minh Phương" class="w-full border rounded-xl p-2.5 text-sm focus:ring-2 focus:ring-brandNavy outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Mã số sinh viên (MSSV) / Trường</label>
+                    <input type="text" placeholder="Nhập MSSV (ĐH Đồng Tháp...)" class="w-full border rounded-xl p-2.5 text-sm focus:ring-2 focus:ring-brandNavy outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Số điện thoại Zalo</label>
+                    <input type="tel" required placeholder="0765750541..." class="w-full border rounded-xl p-2.5 text-sm focus:ring-2 focus:ring-brandNavy outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Mật khẩu</label>
+                    <input type="password" required placeholder="Tối thiểu 6 ký tự..." class="w-full border rounded-xl p-2.5 text-sm focus:ring-2 focus:ring-brandNavy outline-none">
+                </div>
+                <button type="submit" class="w-full bg-brandOrange text-white py-3 rounded-xl font-bold hover:bg-yellow-500 transition shadow-md">Tạo Tài Khoản</button>
+            </form>
+
+            <div class="mt-6 pt-4 border-t border-gray-100 text-center">
+                <span class="text-xs text-gray-400 block mb-3">Hoặc đăng nhập nhanh bằng</span>
+                <div class="flex gap-3 justify-center">
+                    <button onclick="quickSocialAuth('Google')" class="flex-1 border py-2 rounded-xl text-xs font-semibold hover:bg-gray-50 transition flex items-center justify-center gap-2">
+                        <i class="fab fa-google text-red-500"></i> Google
+                    </button>
+                    <button onclick="quickSocialAuth('Facebook')" class="flex-1 border py-2 rounded-xl text-xs font-semibold hover:bg-gray-50 transition flex items-center justify-center gap-2">
+                        <i class="fab fa-facebook text-blue-600"></i> Facebook
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL XEM TRƯỚC -->
+    <div id="previewModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
+            <button onclick="closePreviewModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl"><i class="fas fa-times"></i></button>
+            <span class="bg-blue-100 text-brandNavy text-xs font-bold px-2.5 py-1 rounded-lg">Đọc thử tài liệu</span>
+            <h3 id="previewTitle" class="text-xl font-bold text-brandNavy mt-2 mb-4"></h3>
+            <div id="previewContent" class="bg-gray-50 border p-4 rounded-xl text-sm text-gray-700 min-h-[150px] max-h-[250px] overflow-y-auto mb-6 whitespace-pre-line"></div>
+            <div class="text-right">
+                <button onclick="closePreviewModal()" class="bg-brandNavy text-white px-5 py-2 rounded-xl text-sm font-semibold hover:bg-blue-900">Đóng cửa sổ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL GIỎ HÀNG -->
+    <div id="cartModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
+            <button onclick="toggleCartModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl"><i class="fas fa-times"></i></button>
+            <h3 class="text-lg font-bold text-brandNavy mb-4 flex items-center gap-2"><i class="fas fa-shopping-cart text-brandOrange"></i> Giỏ Hàng Của Bạn</h3>
+            <div id="cartItemsList" class="space-y-3 max-h-[200px] overflow-y-auto text-sm mb-4 border-b pb-4">
+                <p class="text-gray-400 text-center py-4">Giỏ hàng hiện đang trống.</p>
+            </div>
+            <div class="flex justify-between items-center mb-6">
+                <span class="font-bold text-gray-700">Tổng tiền:</span>
+                <span id="cartTotalSum" class="text-xl font-extrabold text-brandOrange">0 VNĐ</span>
+            </div>
+            <button onclick="proceedToPaymentFromCart()" class="w-full bg-brandOrange text-white py-2.5 rounded-xl font-bold hover:bg-yellow-500 transition flex items-center justify-center gap-2">
+                <i class="fas fa-qrcode"></i> Thanh Toán Ngay
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL THANH TOÁN -->
+    <div id="paymentModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closePaymentModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl"><i class="fas fa-times"></i></button>
+
+            <div class="text-center mb-4">
+                <span class="bg-orange-100 text-brandOrange text-xs font-bold px-3 py-1 rounded-full"><i class="fas fa-shield-alt"></i> Thanh Toán Tự Động VietQR</span>
+                <h3 class="text-xl font-extrabold text-brandNavy mt-2">Chuyển Khoản Qua Agribank</h3>
+                <p class="text-xs text-gray-500">Quét mã QR bằng ứng dụng ngân hàng để hoàn tất thanh toán</p>
+            </div>
+
+            <div class="bg-gray-50 border border-gray-200 p-4 rounded-xl text-center mb-4">
+                <img id="qrCodeImage" src="" alt="Mã QR Thanh Toán Agribank" class="w-52 h-52 mx-auto rounded-lg shadow-sm border border-gray-300">
+                <p class="text-[11px] text-gray-500 mt-2"><i class="fas fa-info-circle text-brandNavy"></i> Hỗ trợ Napas 24/7, Agribank, MoMo, ZaloPay...</p>
+            </div>
+
+            <div class="bg-orange-50 border border-orange-200 rounded-xl p-3.5 text-xs mb-4 space-y-2">
+                <h4 class="font-bold text-brandNavy flex items-center gap-1">
+                    <i class="fas fa-map-marker-alt text-brandOrange"></i> Địa chỉ nhận hàng / Điểm hẹn nhận đồ:
+                </h4>
+                <div>
+                    <input type="text" id="customerNamePhone" required placeholder="Họ tên & Số điện thoại / Zalo..." class="w-full border rounded-lg p-2 text-xs bg-white outline-none focus:ring-1 focus:ring-brandOrange mb-1.5">
+                    <input type="text" id="deliveryAddress" required placeholder="Địa chỉ giao hàng (Ký túc xá, Trạm gần ĐH Đồng Tháp...)" class="w-full border rounded-lg p-2 text-xs bg-white outline-none focus:ring-1 focus:ring-brandOrange">
+                </div>
+            </div>
+
+            <div class="bg-blue-50 border border-blue-100 rounded-xl p-3.5 text-xs space-y-2 mb-4">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600">Ngân hàng:</span>
+                    <strong class="text-brandNavy">Agribank (CN H. Lai Vung - Đồng Tháp)</strong>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600">Chủ tài khoản:</span>
+                    <strong class="text-brandNavy">VÕ MINH PHƯƠNG</strong>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600">Số tài khoản:</span>
+                    <div class="flex items-center gap-1">
+                        <strong class="text-brandOrange font-mono text-sm">6510254371506</strong>
+                        <button onclick="navigator.clipboard.writeText('6510254371506'); alert('Đã sao chép số tài khoản!')" class="text-brandNavy hover:text-brandOrange text-xs" title="Sao chép STK"><i class="far fa-copy"></i></button>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center pt-1 border-t border-blue-200">
+                    <span class="text-gray-600">Số tiền thanh toán:</span>
+                    <strong id="payModalAmount" class="text-base text-brandOrange font-extrabold">0 VNĐ</strong>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600">Nội dung chuyển khoản:</span>
+                    <div class="flex items-center gap-1">
+                        <strong id="payModalMemo" class="text-brandNavy font-mono">KBSV1234</strong>
+                        <button onclick="copyMemo()" class="text-brandNavy hover:text-brandOrange text-xs" title="Sao chép nội dung"><i class="far fa-copy"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="confirmPaymentDone()" class="w-full bg-green-600 text-white py-3 rounded-xl font-bold hover:bg-green-700 transition flex items-center justify-center gap-2">
+                <i class="fas fa-check-circle"></i> Tôi Đã Hoàn Tất Chuyển Khoản
+            </button>
+        </div>
+    </div>    <!-- FOOTER -->
+    <footer id="footer" class="bg-brandNavy text-white pt-10 pb-6 border-t border-blue-900">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+                <h3 class="font-bold text-lg mb-3 text-brandOrange">Kho Báu Sinh Viên</h3>
+                <p class="text-xs text-gray-300 leading-relaxed">"Kho nhỏ hôm nay, hành trang lớn ngày mai"</p>
+                <p class="text-xs text-gray-300 mt-2"><i class="fas fa-check text-brandOrange mr-1"></i> Phương châm: Rẻ – Tiện lợi – Uy tín</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-sm mb-3">Kênh Truyền Thông & Hỗ Trợ Khách Hàng</h4>
+                <ul class="text-xs text-gray-300 space-y-2">
+                    <li class="flex items-center gap-2">
+                        <i class="fas fa-phone-alt text-brandOrange"></i> Zalo / Tư vấn trực tiếp: <strong class="text-white">0765750541</strong>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i class="fab fa-facebook text-brandOrange"></i> Facebook / Threads: Cộng Đồng Sinh Viên
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i class="fab fa-tiktok text-brandOrange"></i> TikTok: Review dịch vụ & mẹo học tập
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i class="fas fa-map-marker-alt text-brandOrange"></i> Điểm hỗ trợ trực tiếp gần Trường Đại học Đồng Tháp
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-sm mb-3">Thành Viên Phát Triển Dự Án</h4>
+                <ul class="text-xs text-gray-300 space-y-1 grid grid-cols-2">
+                    <li>• Ngọc Diễm</li>
+                    <li>• Thiên Hương</li>
+                    <li>• Như Huỳnh</li>
+                    <li>• Hoàng Oanh</li>
+                    <li>• Võ Minh Phương</li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center text-xs text-gray-400 border-t border-blue-900/50 pt-4">
+            © 2026 Kho Báu Sinh Viên. Bản quyền thuộc về Nhóm dự án.
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        let cart = [];
+        let currentCalculatedTotal = 0;
+        let currentUser = null;
+
+        // 1. Logic Đăng Nhập & Đăng Ký
+        function openAuthModal(mode) {
+            switchAuthTab(mode);
+            document.getElementById('authModal').classList.remove('hidden');
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModal').classList.add('hidden');
+        }
+
+        function switchAuthTab(mode) {
+            const tabLogin = document.getElementById('tabLogin');
+            const tabRegister = document.getElementById('tabRegister');
+            const formLogin = document.getElementById('formLogin');
+            const formRegister = document.getElementById('formRegister');
+
+            if (mode === 'login') {
+                tabLogin.className = "flex-1 py-2.5 text-center font-bold text-brandNavy border-b-2 border-brandNavy transition";
+                tabRegister.className = "flex-1 py-2.5 text-center font-bold text-gray-400 border-b-2 border-transparent transition";
+                formLogin.classList.remove('hidden');
+                formRegister.classList.add('hidden');
+            } else {
+                tabRegister.className = "flex-1 py-2.5 text-center font-bold text-brandNavy border-b-2 border-brandNavy transition";
+                tabLogin.className = "flex-1 py-2.5 text-center font-bold text-gray-400 border-b-2 border-transparent transition";
+                formRegister.classList.remove('hidden');
+                formLogin.classList.add('hidden');
+            }
+        }
+
+        function handleLoginSubmit(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUser').value || 'Sinh viên';
+            setLoggedInUser(username);
+            closeAuthModal();
+            alert('Đăng nhập thành công! Chào mừng bạn quay trở lại.');
+        }
+
+        function handleRegisterSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('regName').value || 'Sinh viên mới';
+            setLoggedInUser(name);
+            closeAuthModal();
+            alert('Tạo tài khoản thành công! Bạn đã đăng nhập vào hệ thống.');
+        }
+
+        function quickSocialAuth(platform) {
+            setLoggedInUser('Sinh viên (' + platform + ')');
+            closeAuthModal();
+            alert('Đăng nhập thành công bằng tài khoản ' + platform + '!');
+        }
+
+        function setLoggedInUser(name) {
+            currentUser = name;
+            const authArea = document.getElementById('authHeaderArea');
+            authArea.innerHTML = `
+                <div class="flex items-center gap-2 bg-blue-50 border border-blue-200 px-3 py-1.5 rounded-full">
+                    <i class="fas fa-user-circle text-brandNavy text-lg"></i>
+                    <span class="text-xs font-bold text-brandNavy max-w-[100px] truncate">${name}</span>
+                    <button onclick="logoutUser()" class="text-gray-400 hover:text-red-500 text-xs ml-1" title="Đăng xuất"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            `;
+        }
+
+        function logoutUser() {
+            currentUser = null;
+            document.getElementById('authHeaderArea').innerHTML = `
+                <button onclick="openAuthModal('login')" class="bg-brandNavy text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-blue-900 transition shadow-sm flex items-center gap-1.5">
+                    <i class="fas fa-user-circle"></i> Đăng nhập
+                </button>
+            `;
+            alert('Đã đăng xuất tài khoản.');
+        }
+
+        // 2. Tính toán giá thuê tự động
+        function calculateRentalPrice() {
+            const deviceVal = document.getElementById('calcDevice').value.split('_');
+            const type = document.getElementById('calcType').value;
+            const amount = parseInt(document.getElementById('calcAmount').value) || 1;
+            const labelAmount = document.getElementById('calcLabelAmount');
+
+            let unitPrice = 0;
+            if (type === 'hour') {
+                unitPrice = parseInt(deviceVal[0]);
+                labelAmount.innerText = "Số giờ thuê";
+            } else {
+                unitPrice = parseInt(deviceVal[1]);
+                labelAmount.innerText = "Số ngày thuê";
+            }
+
+            currentCalculatedTotal = unitPrice * amount;
+            document.getElementById('totalPriceResult').innerText = currentCalculatedTotal.toLocaleString('vi-VN') + ' VNĐ';
+        }
+
+        // 3. Tìm kiếm realtime
+        function filterItems() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.item-card');
+            cards.forEach(card => {
+                const name = card.getAttribute('data-name').toLowerCase();
+                card.style.display = name.includes(query) ? 'flex' : 'none';
+            });
+        }
+
+        // 4. Modal Preview
+        function openPreviewModal(title, content) {
+            document.getElementById('previewTitle').innerText = title;
+            document.getElementById('previewContent').innerText = content;
+            document.getElementById('previewModal').classList.remove('hidden');
+        }
+
+        function closePreviewModal() {
+            document.getElementById('previewModal').classList.add('hidden');
+        }
+
+        // Thêm đơn thiết kế slide vào giỏ hàng
+        function escapeHTML(value) {
+            return String(value ?? '').replace(/[&<>"']/g, character => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            })[character]);
+        }
+
+        function addSlidesToCart() {
+            const quantityInput = document.getElementById('slideQuantity');
+            const quantity = Math.floor(Number(quantityInput.value));
+
+            if (!Number.isFinite(quantity) || quantity < 1) {
+                alert('Vui lòng nhập số lượng slide hợp lệ (tối thiểu 1 slide).');
+                quantityInput.focus();
+                return;
+            }
+
+            const topic = document.getElementById('slideTopic').value.trim();
+            const style = document.getElementById('slideStyle').value;
+            const color = document.getElementById('slideColor').value.trim();
+            const description = document.getElementById('slideDescription').value.trim();
+
+            const details = [
+                'Chủ đề: ' + (topic || 'Chưa cung cấp'),
+                'Phong cách: ' + style,
+                'Màu sắc: ' + (color || 'Theo đề xuất'),
+                'Yêu cầu thiết kế: ' + (description || 'Chưa cung cấp')
+            ].join('\n');
+
+            const total = quantity * 6000;
+            addToCart('Slide PowerPoint (' + quantity + ' slide)', total, details);
+        }
+
+        // 5. Giỏ hàng Logic
+        function addToCart(itemName, price, details = '') {
+            cart.push({ name: itemName, price: price, details: details });
+            updateCartUI();
+            alert('Đã thêm "' + itemName + '" vào giỏ hàng!');
+        }
+
+        function updateCartUI() {
+            document.getElementById('cartCount').innerText = cart.length;
+            const cartList = document.getElementById('cartItemsList');
+            let total = 0;
+
+            if (cart.length === 0) {
+                cartList.innerHTML = '<p class="text-gray-400 text-center py-4">Giỏ hàng hiện đang trống.</p>';
+            } else {
+                cartList.innerHTML = '';
+                cart.forEach((item, index) => {
+                    total += item.price;
+                    cartList.innerHTML += `
+                        <div class="flex justify-between items-center border-b pb-2">
+                            <div>
+                                <p class="font-semibold text-gray-800">${escapeHTML(item.name)}</p>
+                                ${item.details ? `<p class="text-[11px] text-gray-500 mt-1 whitespace-pre-line">${escapeHTML(item.details)}</p>` : ''}
+                                <span class="text-xs text-brandOrange font-bold">${item.price.toLocaleString('vi-VN')} VNĐ</span>
+                            </div>
+                            <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700 text-xs"><i class="fas fa-trash"></i></button>
+                        </div>
+                    `;
+                });
+            }
+            document.getElementById('cartTotalSum').innerText = total.toLocaleString('vi-VN') + ' VNĐ';
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function toggleCartModal() {
+            document.getElementById('cartModal').classList.toggle('hidden');
+        }
+
+        // 6. Thanh Toán QR Code
+        function showPaymentModal(amount, memoPrefix) {
+            const randomCode = Math.floor(1000 + Math.random() * 9000);
+            const memo = memoPrefix + randomCode;
+
+            document.getElementById('payModalAmount').innerText = amount.toLocaleString('vi-VN') + ' VNĐ';
+            document.getElementById('payModalMemo').innerText = memo;
+
+            const qrUrl = `https://img.vietqr.io/image/970405-6510254371506-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(memo)}&accountName=VO%20MINH%20PHUONG`;
+            document.getElementById('qrCodeImage').src = qrUrl;
+
+            document.getElementById('paymentModal').classList.remove('hidden');
+        }
+
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.add('hidden');
+        }
+
+        function buyNow(itemName, price) {
+            showPaymentModal(price, 'KBSV');
+        }
+
+        function checkoutCalculatedRental() {
+            if (currentCalculatedTotal <= 0) calculateRentalPrice();
+            showPaymentModal(currentCalculatedTotal, 'THUE');
+        }
+
+        function proceedToPaymentFromCart() {
+            if (cart.length === 0) {
+                alert('Giỏ hàng của bạn hiện đang trống!');
+                return;
+            }
+            let totalSum = cart.reduce((sum, i) => sum + i.price, 0);
+            toggleCartModal();
+            showPaymentModal(totalSum, 'KBSV');
+        }
+
+        function copyMemo() {
+            const memoText = document.getElementById('payModalMemo').innerText;
+            navigator.clipboard.writeText(memoText);
+            alert('Đã sao chép nội dung chuyển khoản: ' + memoText);
+        }
+
+        function confirmPaymentDone() {
+            const addr = document.getElementById('deliveryAddress').value;
+            const info = document.getElementById('customerNamePhone').value;
+
+            if (!info || !addr) {
+                alert('Vui lòng điền Họ tên, Số điện thoại và Địa chỉ nhận hàng trước khi xác nhận!');
+                return;
+            }
+
+            alert('Cảm ơn bạn! Hệ thống đã ghi nhận đơn hàng.\nThông tin giao hàng: ' + addr + '\nChúng tôi sẽ liên hệ qua Zalo 0765750541 để giao giáo trình/thiết bị cho bạn sớm nhất!');
+            closePaymentModal();
+            cart = [];
+            updateCartUI();
+        }
+
+        // Khởi tạo ban đầu
+        calculateRentalPrice();
+    </script>
+</body>
+</html>
